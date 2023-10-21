@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { WeatherForm } from "./weatherForm"
 import { WeatherMainInfo } from "./weatherMainInfo"
+import styles from './weatherApp.module.css'
+import { BounceLoader } from "react-spinners"
 
 
 type WeatherData = {
@@ -9,6 +11,8 @@ type WeatherData = {
   }
   location: {
     name: string
+    lon: number
+    lat: number
   } 
 }
 
@@ -36,13 +40,12 @@ const WeatherApp = ():JSX.Element => {
         `${ url }&key=${ apiKey }&q=${ city }`
       );
 
-      console.log(request)
-
-
       const json = await request.json();
 
-      setWeather(json)
-      console.log(weather)
+      setTimeout(() => {
+        setWeather(json)
+      }, 2000)
+
     } catch (error) {
       console.log(error)
     }
@@ -57,10 +60,17 @@ const WeatherApp = ():JSX.Element => {
 
   return (
     <>
+    <div className={styles.weatherContainer}>
       <WeatherForm onChangeCity={ handleChangeCity }/>
-      <WeatherMainInfo
+      { weather ? <WeatherMainInfo
         informationWeather={ weather }
-      />
+        /> : 
+        <div className={styles.loading}>
+          <BounceLoader color="#36d7b7" />
+        </div>
+      }
+      
+    </div>
     </>
   )
 }
