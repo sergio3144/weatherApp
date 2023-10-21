@@ -13,7 +13,7 @@ const WeatherForm = ({ onChangeCity }: { onChangeCity: onChangeCityValue } ):JSX
   }
   
   const handleSubmit = (e:ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    /* e.preventDefault(); */
     onChangeCity(city);
   }
   return (
