@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { ChangeEvent } from 'react'
+import styles from './weatherForm.module.css'
 
 type onChangeCityValue = (city: string) => void
 
@@ -13,13 +14,13 @@ const WeatherForm = ({ onChangeCity }: { onChangeCity: onChangeCityValue } ):JSX
   }
   
   const handleSubmit = (e:ChangeEvent<HTMLFormElement>) => {
-    /* e.preventDefault(); */
+    e.preventDefault();
     onChangeCity(city);
   }
   return (
     <>
-      <form action="" onSubmit={ handleSubmit }>
-        <input type="text" onChange={ onChange } />
+      <form action="" onSubmit={ handleSubmit } className={styles.container}>
+        <input type="text" onChange={ onChange } className={styles.input}/>
       </form>
     </>
   )
